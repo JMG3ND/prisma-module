@@ -1,0 +1,1 @@
+export { checkLibFile } from './checkFiles'
