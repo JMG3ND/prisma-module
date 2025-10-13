@@ -1,8 +1,9 @@
+<script setup>
+const { data } = await useFetch('/api/hello')
+</script>
+
 <template>
   <div>
-    Nuxt module playground!
+    {{ data }}
   </div>
 </template>
-
-<script setup>
-</script>
