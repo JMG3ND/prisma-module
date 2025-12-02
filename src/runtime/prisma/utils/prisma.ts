@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, Prisma } from '@prisma/client'
 
 declare global {
   var __prisma: PrismaClient | undefined
@@ -25,3 +25,5 @@ process.on('beforeExit', async () => {
 })
 
 export const prisma = getInstance()
+export { Prisma }
+

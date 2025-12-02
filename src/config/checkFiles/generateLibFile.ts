@@ -10,7 +10,7 @@ export function generateLibFile(finalPath: string): void {
       consola.info(`Created directory: ${finalDir}`)
     }
 
-    const templateContent = `import { PrismaClient } from '@prisma/client'
+    const templateContent = `import { PrismaClient, Prisma } from '@prisma/client'
 
 declare global {
   var __prisma: PrismaClient | undefined
@@ -37,6 +37,7 @@ process.on('beforeExit', async () => {
 })
 
 export const prisma = getInstance()
+export Prisma
 `
 
     fs.writeFileSync(finalPath, templateContent, 'utf8')
