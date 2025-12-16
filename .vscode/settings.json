@@ -1,4 +1,0 @@
-{
-  "eslint.useFlatConfig": true,
-  "prisma.pinToPrisma6": true
-}

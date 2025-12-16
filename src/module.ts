@@ -1,5 +1,5 @@
 import { defineNuxtModule, createResolver, addServerImportsDir } from '@nuxt/kit'
-import { checkLibFile, configPrismaForNuxt } from './config'
+import { checkLibFile, configPrismaForNuxt, readSchemaPrisma, checkPrismaConfigFile } from './config'
 
 interface MyModuleOptions {
   routePrismaDir: string
@@ -7,8 +7,8 @@ interface MyModuleOptions {
 
 export default defineNuxtModule<MyModuleOptions>({
   meta: {
-    name: 'my-module',
-    configKey: 'myModule',
+    name: 'prisma-module',
+    configKey: 'prismaModule',
   },
   // Default configuration options of the Nuxt module
   defaults: {
@@ -20,8 +20,15 @@ export default defineNuxtModule<MyModuleOptions>({
 
     const rootDir = nuxt.options.rootDir
     const prismaFileDir = resolve(rootDir, options.routePrismaDir)
+    const prismaSchemaPath = resolve(rootDir, 'prisma/schema.prisma')
+    const prismaConfigTsPath = resolve(rootDir, 'prisma.config.ts')
 
-    checkLibFile(prismaFileDir)
+    checkPrismaConfigFile(prismaConfigTsPath)
+
+    // Leer el archivo schema.prisma
+    const { outputPath, provider } = readSchemaPrisma(prismaSchemaPath)
+
+    checkLibFile(rootDir, prismaFileDir, outputPath, provider)
 
     addServerImportsDir(prismaFileDir)
 

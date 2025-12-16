@@ -1,2 +1,2 @@
 export { configPrismaForNuxt } from './configPrismaForNuxt'
-export { checkLibFile } from './checkFiles'
+export { checkLibFile, readSchemaPrisma, checkPrismaConfigFile } from './checkFiles'
